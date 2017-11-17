@@ -1,2 +1,21 @@
 ---
-# defaults file for fail2ban
+fail2ban_enabled:                 true
+fail2ban_dir:                     "/etc/fail2ban"
+fail2ban_jail_dir:                "{{ fail2ban_dir }}/jail.d"
+fail2ban_filter_dir:              "{{ fail2ban_dir }}/filter.d"
+fail2ban_jail_config_template:    "default_jail.conf.j2"
+fail2ban_filter_config_template:  "default_filter.conf.j2"
+fail2ban_app_name:                "{{ app_name | default('default') }}"
+fail2ban_app_deploy_dir:          "{{ deploy_dir | default('/opt/' + fail2ban_app_name) }}"
+fail2ban_logpath:                 "{{ fail2ban_app_deploy_dir }}/logs/{{ fail2ban_app_name }}.log"
+fail2ban_fqdn:                    "{{ app_fqdn | default(fail2ban_app_name + '.test') }}"
+fail2ban_maxretry:                5     # if 5 matches
+fail2ban_findtime:                60    # in 1 min
+fail2ban_bantime:                 3600  # ban for 1 day
+fail2ban_action:                  'iptables-multiport[name={{ fail2ban_app_name }}, port="http,https", protocol=tcp]'
+fail2ban_failregex:               '<HOST>.*"GET /wp-login.php"'
+fail2ban_ignoreregex:
+# TODO: implement
+fail2ban_ignoreips:
+  - 127.0.0.1/8
+  - 10.0.0.1/16

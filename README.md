@@ -3,6 +3,10 @@ Ansible Role: Fail2Ban
 
 Installs and configures Fail2Ban
 
+TODOs:
+- support multiple applications
+- parameterize actions and support multiple
+
 Requirements
 ------------
 

@@ -1,2 +1,5 @@
 ---
-# handlers file for fail2ban
+- name: restart fail2ban
+  systemd :
+    name  : firewalld
+    state : restarted

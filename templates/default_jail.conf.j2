@@ -1,0 +1,13 @@
+[DEFAULT]
+ignoreip = 127.0.0.1/8
+{# 10.0.0.1/16 #}
+
+[{{ app_name }}]
+enabled  = {{ fail2ban_enabled }}
+filter   = {{ fail2ban_app_name }}
+{# action   = {{ fail2ban_action }} #}
+action = firewallcmd-ipset
+logpath  = {{ fail2ban_logpath }}
+maxretry = {{ fail2ban_maxretry }}
+bantime  = {{ fail2ban_bantime }}
+findtime = {{ fail2ban_findtime }}
